@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+#wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+#countdown {
+  color: red;
+  font-weight: 600;
+  margin: 0 4px;
+}
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  <span>⏰ 얼리버드 마감 종료까지</span>
+  <span id="countdown"></span>
+  <span>남음 ⏰</span>
+</div>
+
+<script>
+function update() {
+  const end = new Date('2026-01-24T23:59:59');
+  const now = new Date();
+  const diff = end - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown').textContent = ' 종료됨 ';
+    return;
+  }
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff / 3600000) % 24;
+  const m = Math.floor(diff / 60000) % 60;
+  const s = Math.floor(diff / 1000) % 60;
+
+  document.getElementById('countdown').textContent =
+    ' ' +
+    (d ? d + '일 ' : '') +
+    (h ? h + '시간 ' : '') +
+    (m ? m + '분 ' : '') +
+    s + '초 ';
+}
+
+update();
+setInterval(update, 1000);
+</script>
+
+</body>
+</html>
